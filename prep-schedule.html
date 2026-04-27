@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep Schedule</title>
+<style>
+  :root {
+    --bg: #0f0f11;
+    --bg2: #17171a;
+    --bg3: #1e1e23;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #8a8880;
+    --faint: #4a4845;
+    --purple: #9d8fff;
+    --purple-bg: rgba(157,143,255,0.1);
+    --purple-border: rgba(157,143,255,0.25);
+    --blue: #6bb8ff;
+    --blue-bg: rgba(107,184,255,0.08);
+    --blue-border: rgba(107,184,255,0.2);
+    --amber: #f0a84a;
+    --amber-bg: rgba(240,168,74,0.08);
+    --amber-border: rgba(240,168,74,0.2);
+    --teal: #4ecdb4;
+    --teal-bg: rgba(78,205,180,0.08);
+    --teal-border: rgba(78,205,180,0.2);
+    --red: #ff7070;
+    --red-bg: rgba(255,112,112,0.08);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .status-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    background: var(--bg2);
+  }
+
+  .pill.purple { border-color: var(--purple-border); color: var(--purple); background: var(--purple-bg); }
+  .pill.blue   { border-color: var(--blue-border);   color: var(--blue);   background: var(--blue-bg); }
+  .pill.amber  { border-color: var(--amber-border);  color: var(--amber);  background: var(--amber-bg); }
+  .pill.teal   { border-color: var(--teal-border);   color: var(--teal);   background: var(--teal-bg); }
+
+  .section { margin-bottom: 40px; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 14px;
+  }
+
+  /* Daily blocks */
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .day-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .day-block {
+    border-radius: var(--radius);
+    padding: 14px;
+    border: 1px solid;
+  }
+
+  .day-block .time { font-size: 11px; margin-bottom: 6px; font-weight: 500; opacity: 0.7; }
+  .day-block .name { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .day-block .sub  { font-size: 11px; opacity: 0.65; }
+
+  .db-purple { background: var(--purple-bg); border-color: var(--purple-border); color: var(--purple); }
+  .db-blue   { background: var(--blue-bg);   border-color: var(--blue-border);   color: var(--blue); }
+  .db-amber  { background: var(--amber-bg);  border-color: var(--amber-border);  color: var(--amber); }
+  .db-teal   { background: var(--teal-bg);   border-color: var(--teal-border);   color: var(--teal); }
+
+  /* Process steps */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .step {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--purple-bg);
+    border: 1px solid var(--purple-border);
+    color: var(--purple);
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-body strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .step-body span {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Week tabs */
+  .week-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border2);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    background: transparent;
+    transition: all .15s;
+    font-family: inherit;
+  }
+
+  .tab:hover { border-color: var(--border2); color: var(--text); background: var(--bg2); }
+  .tab.active { background: var(--purple-bg); border-color: var(--purple-border); color: var(--purple); }
+
+  .week-content { display: none; }
+  .week-content.active { display: block; }
+
+  .week-insight {
+    border-left: 2px solid var(--purple);
+    padding: 12px 16px;
+    background: var(--purple-bg);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .week-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  /* Tracks */
+  .tracks { display: flex; flex-direction: column; gap: 24px; }
+
+  .track {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .track-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s;
+  }
+
+  .track-header:hover { background: var(--bg3); }
+
+  .track-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .td-purple { background: var(--purple); }
+  .td-blue   { background: var(--blue); }
+  .td-amber  { background: var(--amber); }
+  .td-teal   { background: var(--teal); }
+
+  .track-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .track-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  .tt-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+  .tt-blue   { background: var(--blue-bg);   color: var(--blue);   border: 1px solid var(--blue-border); }
+  .tt-amber  { background: var(--amber-bg);  color: var(--amber);  border: 1px solid var(--amber-border); }
+
+  .track-chevron {
+    font-size: 10px;
+    color: var(--faint);
+    transition: transform .2s;
+  }
+
+  .track-chevron.open { transform: rotate(90deg); }
+
+  .track-body {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .track-body.open { display: block; }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 14px;
+    padding-left: 18px;
+    border-left: 1px solid var(--border);
+    margin-left: 4px;
+  }
+
+  .item {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    display: flex;
+    gap: 8px;
+  }
+
+  .item::before {
+    content: "→";
+    color: var(--faint);
+    flex-shrink: 0;
+    font-size: 12px;
+    margin-top: 1px;
+  }
+
+  .item.highlight { color: var(--text); }
+
+  .item.highlight::before { color: var(--purple); }
+
+  /* Patterns section */
+  .patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  @media (max-width: 550px) {
+    .patterns-grid { grid-template-columns: 1fr; }
+  }
+
+  .pattern-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color .15s;
+  }
+
+  .pattern-card:hover { border-color: var(--border2); }
+
+  .pattern-card.open { border-color: var(--purple-border); }
+
+  .pattern-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pattern-week {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--faint);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .pattern-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .pattern-pct {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+  }
+
+  .pattern-insight {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.55;
+    display: none;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pattern-insight.open { display: block; }
+
+  .pattern-problems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .prob-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--bg3);
+    color: var(--faint);
+    border: 1px solid var(--border);
+  }
+
+  /* Divider */
+  .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+  /* Footer note */
+  .note {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .note strong { color: var(--text); font-weight: 600; }
+
+  /* Scroll to top */
+  .back-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 16px;
+    transition: all .15s;
+    text-decoration: none;
+  }
+
+  .back-top:hover { background: var(--purple-bg); border-color: var(--purple-border); color: var(--purple); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>Interview Prep Schedule</h1>
+        <div class="header-sub">4 weeks · Full day · DSA + React + System Design + NeatHunt</div>
+      </div>
+    </div>
+    <div class="status-pills">
+      <span class="pill purple">React sprint done</span>
+      <span class="pill blue">DSA: starting week 1</span>
+      <span class="pill amber">NeatHunt: CRUD done</span>
+      <span class="pill teal">Gmail OAuth: in progress</span>
+    </div>
+  </div>
+
+  <!-- Daily Routine -->
+  <div class="section">
+    <div class="section-label">Daily routine</div>
+    <div class="day-grid">
+      <div class="day-block db-purple">
+        <div class="time">9:00 – 10:30am</div>
+        <div class="name">DSA</div>
+        <div class="sub">1 problem, done deeply</div>
+      </div>
+      <div class="day-block db-blue">
+        <div class="time">11:00am – 1:00pm</div>
+        <div class="name">Interview prep</div>
+        <div class="sub">React, TS, system design</div>
+      </div>
+      <div class="day-block db-amber">
+        <div class="time">2:00 – 3:30pm</div>
+        <div class="name">NeatHunt</div>
+        <div class="sub">Ship one thing</div>
+      </div>
+      <div class="day-block db-teal">
+        <div class="time">4:00 – 5:00pm</div>
+        <div class="name">Mock / review</div>
+        <div class="sub">Daily debrief or mock</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DSA Process -->
+  <div class="section">
+    <div class="section-label">DSA thinking process — use on every single problem</div>
+    <div class="process-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Restate it</strong>
+          <span>Say the problem back in your own words. Out loud. Before touching the keyboard.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Small example</strong>
+          <span>Walk through it manually with a tiny input. Write it on paper.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Name the pattern</strong>
+          <span>What does this feel like? Counting? Window? Two pointers? Recursion?</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Pseudocode</strong>
+          <span>Write English steps before any code. Don't skip this ever.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Code it</strong>
+          <span>Translate pseudocode line by line. Slow and deliberate is fine.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <strong>Edge cases</strong>
+          <span>Empty input, single item, duplicates, negatives, large N.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DSA Patterns -->
+  <div class="section">
+    <div class="section-label">DSA patterns roadmap — click to expand</div>
+    <div class="patterns-grid">
+      <div class="pattern-card" onclick="togglePattern(this)">
+        <div class="pattern-top">
+          <div>
+            <div class="pattern-week">Week 1</div>
+            <div class="pattern-name">Hashmaps + frequency maps</div>
+          </div>
+          <div class="pattern-pct">~30%</div>
+        </div>
+        <div class="pattern-insight">
+          <strong>Core insight:</strong> If you need to check if something exists, count occurrences, or group things — reach for an object/Map first. Turns O(n²) brute force into O(n) almost always.<br><br>
+          <strong>Key intuition:</strong> "Can I trade memory for time by storing something I've already seen?"
+          <div class="pattern-problems">
+            <span class="prob-tag">Two Sum</span>
+            <span class="prob-tag">Valid Anagram</span>
+            <span class="prob-tag">Group Anagrams</span>
+            <span class="prob-tag">Top K Frequent</span>
+            <span class="prob-tag">Contains Duplicate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-card" onclick="togglePattern(this)">
+        <div class="pattern-top">
+          <div>
+            <div class="pattern-week">Week 2</div>
+            <div class="pattern-name">Two pointers</div>
+          </div>
+          <div class="pattern-pct">~15%</div>
+        </div>
+        <div class="pattern-insight">
+          <strong>Core insight:</strong> Instead of nested loops (O(n²)), place one pointer at each end and move them inward based on a condition. Works on sorted arrays or when you're comparing elements.<br><br>
+          <strong>Key intuition:</strong> "Can I avoid the inner loop by moving two indices smartly?"
+          <div class="pattern-problems">
+            <span class="prob-tag">Valid Palindrome</span>
+            <span class="prob-tag">Two Sum II</span>
+            <span class="prob-tag">Container With Most Water</span>
+            <span class="prob-tag">3Sum</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-card" onclick="togglePattern(this)">
+        <div class="pattern-top">
+          <div>
+            <div class="pattern-week">Week 2</div>
+            <div class="pattern-name">Sliding window</div>
+          </div>
+          <div class="pattern-pct">~10%</div>
+        </div>
+        <div class="pattern-insight">
+          <strong>Core insight:</strong> For problems about subarrays or substrings of size k, slide a window across instead of recomputing. Expand right, shrink left when a condition breaks.<br><br>
+          <strong>Key intuition:</strong> "Is this asking about a contiguous chunk that changes as I move through the array?"
+          <div class="pattern-problems">
+            <span class="prob-tag">Max subarray avg</span>
+            <span class="prob-tag">Longest substr no repeat</span>
+            <span class="prob-tag">Min window substring</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-card" onclick="togglePattern(this)">
+        <div class="pattern-top">
+          <div>
+            <div class="pattern-week">Week 3</div>
+            <div class="pattern-name">Recursion</div>
+          </div>
+          <div class="pattern-pct">~15%</div>
+        </div>
+        <div class="pattern-insight">
+          <strong>Core insight:</strong> The function does one small thing, then calls itself on the rest. Always define: base case (when to stop) + recursive case (what to do + call self).<br><br>
+          <strong>Key intuition:</strong> "Can I solve this if I assume the function already works on a smaller version of the problem?"
+          <div class="pattern-problems">
+            <span class="prob-tag">Factorial</span>
+            <span class="prob-tag">Flatten nested array</span>
+            <span class="prob-tag">Deep clone</span>
+            <span class="prob-tag">Power of two</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-card" onclick="togglePattern(this)">
+        <div class="pattern-top">
+          <div>
+            <div class="pattern-week">Week 3</div>
+            <div class="pattern-name">Trees (BFS + DFS)</div>
+          </div>
+          <div class="pattern-pct">~10%</div>
+        </div>
+        <div class="pattern-insight">
+          <strong>Core insight:</strong> Trees are just recursion with structure. DFS = go deep first (recursion or stack). BFS = level by level (queue). DOM problems are tree problems.<br><br>
+          <strong>Key intuition:</strong> "DFS when I care about paths or depth. BFS when I care about levels or shortest path."
+          <div class="pattern-problems">
+            <span class="prob-tag">Max depth</span>
+            <span class="prob-tag">Invert binary tree</span>
+            <span class="prob-tag">Level order traversal</span>
+            <span class="prob-tag">Same tree</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-card" onclick="togglePattern(this)">
+        <div class="pattern-top">
+          <div>
+            <div class="pattern-week">Week 4</div>
+            <div class="pattern-name">Mixed pattern drills</div>
+          </div>
+          <div class="pattern-pct">timed</div>
+        </div>
+        <div class="pattern-insight">
+          <strong>The goal:</strong> Given a new problem, identify the pattern in under 2 minutes before coding. That's the skill.<br><br>
+          <strong>Week 4 rule:</strong> 25-minute timer. No hints. Name the pattern first. Talk through complexity after. One problem done deeply beats ten rushed.
+          <div class="pattern-problems">
+            <span class="prob-tag">Mixed hashmap</span>
+            <span class="prob-tag">Mixed two-pointer</span>
+            <span class="prob-tag">Mixed recursion</span>
+            <span class="prob-tag">Mixed tree</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4 Week Plan -->
+  <div class="section">
+    <div class="section-label">4-week breakdown</div>
+    <div class="week-tabs">
+      <button class="tab active" onclick="showWeek(0)">Week 1 — Fix the gaps</button>
+      <button class="tab" onclick="showWeek(1)">Week 2 — React deep</button>
+      <button class="tab" onclick="showWeek(2)">Week 3 — Architecture</button>
+      <button class="tab" onclick="showWeek(3)">Week 4 — Full mocks</button>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div id="w0" class="week-content active">
+      <div class="week-meta">
+        <span class="pill purple">DSA: Hashmaps</span>
+        <span class="pill blue">Prep: Gamehok failures</span>
+        <span class="pill amber">NeatHunt: Add job UI</span>
+      </div>
+      <div class="week-insight">
+        The hashmap pattern solves ~30% of easy problems. Also this week: the exact gaps that cost you Gamehok — optimistic UI, race conditions, TypeScript, Promise concurrency, and persistent state. These first.
+      </div>
+      <div class="tracks">
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-purple"></div>
+            <div class="track-name">DSA — hashmaps (1 problem/day, deeply)</div>
+            <span class="track-tag tt-purple">Week 1 pattern</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">Day 1: Don't code yet. Do Two Sum on paper only. Practice the 6-step process.</div>
+              <div class="item">Day 2: Valid Anagram — count character frequency. Why does hashmap make this O(n)?</div>
+              <div class="item">Day 3: Group Anagrams — sorted string as the key groups anagrams. Build the intuition.</div>
+              <div class="item">Day 4: Top K Frequent Elements — frequency map + sort</div>
+              <div class="item">Day 5: Contains Duplicate + stretch: Longest Substring Without Repeating</div>
+              <div class="item">Day 6: Recode any problem you struggled with, from scratch, no looking.</div>
+              <div class="item">Day 7: Rest. Write each pattern in one sentence. What did it feel like?</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-blue"></div>
+            <div class="track-name">Interview prep — Gamehok gap list</div>
+            <span class="track-tag tt-blue">Critical</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">Optimistic UI: update UI immediately → fire API → on failure rollback + toast. Keep a previousState ref. Build a like button that rolls back. (Mon/Tue)</div>
+              <div class="item highlight">Race conditions + AbortController: cancel previous fetch in useEffect cleanup. Build a debounced search. Throttle network in DevTools to test. (Wed/Thu)</div>
+              <div class="item">TypeScript — type vs interface: interface extends + declaration merging, type for unions/intersections. Know Partial, Pick, Omit, Record, ReturnType. Stop saying "I haven't used TS much." (Fri)</div>
+              <div class="item">Promise concurrency: browsers allow ~6 parallel HTTP/1.1 connections. Promise.all fires all at once. Build a function that fetches N URLs max 3 at a time. (Sat)</div>
+              <div class="item">Persistent state: state resets on app close. Layers: in-memory → sessionStorage → localStorage → server. Chat history = fetch from server on mount, sync new messages immediately. (Sat)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-amber"></div>
+            <div class="track-name">NeatHunt — add job manually from UI</div>
+            <span class="track-tag tt-amber">1.5 hrs/day</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">Build the add job form — connect it to the CRUD routes you already built.</div>
+              <div class="item">Add error handling: API error states, loading states, form validation.</div>
+              <div class="item">Use this as optimistic UI practice — add the job to state immediately, rollback if API fails.</div>
+              <div class="item">Add TypeScript types to your components as you go — real practice, not toy examples.</div>
+              <div class="item">Goal by end of week: the app is end-to-end usable for manually tracking jobs.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div id="w1" class="week-content">
+      <div class="week-meta">
+        <span class="pill purple">DSA: Two pointers + sliding window</span>
+        <span class="pill blue">Prep: React internals</span>
+        <span class="pill amber">NeatHunt: TypeScript migration</span>
+      </div>
+      <div class="week-insight">
+        Two pointers + sliding window cover another ~25% of interview problems. The key: instead of nested loops (O(n²)), two indices move smartly to stay O(n). On the prep side — the questions that separate junior from mid.
+      </div>
+      <div class="tracks">
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-purple"></div>
+            <div class="track-name">DSA — two pointers + sliding window</div>
+            <span class="track-tag tt-purple">Week 2 pattern</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">Day 1: Valid Palindrome — two pointers from both ends, move inward.</div>
+              <div class="item">Day 2: Two Sum II (sorted array) — when sorted, two pointers dominate.</div>
+              <div class="item">Day 3: Container With Most Water — understand WHY you always move the shorter side pointer.</div>
+              <div class="item">Day 4: Max Average Subarray — fixed-size sliding window. Add, remove, track max.</div>
+              <div class="item">Day 5: Longest Substring Without Repeating Characters — variable window + hashmap.</div>
+              <div class="item">Day 6: Attempt Minimum Window Substring (hard) — understand the approach, don't stress if incomplete.</div>
+              <div class="item">Pattern check: given a new problem, can you identify two-pointer vs sliding window before coding?</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-blue"></div>
+            <div class="track-name">Interview prep — React deep internals</div>
+            <span class="track-tag tt-blue">Core</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">useEffect stale closures: reproduce the setInterval bug (count never increments), fix 3 ways: add dep, functional updater setCount(c => c+1), useRef for latest value. (Mon/Tue)</div>
+              <div class="item">React.memo vs useMemo vs useCallback — memo skips re-render if props shallowly equal. useMemo caches expensive computation. useCallback stabilises function reference. Know when NOT to use them. (Wed)</div>
+              <div class="item">State management decision: local → Context → Zustand → Redux. Your gap: jumping to Redux when simple state works. Anchor on requirements first. (Thu)</div>
+              <div class="item">Custom hooks — build from scratch: useFetch (with abort), useDebounce, useLocalStorage, usePrevious. (Fri/Sat)</div>
+              <div class="item">1 full coding mock this week — React component + logic question. Timed.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-amber"></div>
+            <div class="track-name">NeatHunt — TypeScript + one new feature</div>
+            <span class="track-tag tt-amber">1.5 hrs/day</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item">Migrate existing components to TypeScript — type your API responses first, it forces you to think about data shape.</div>
+              <div class="item">Add one meaningful feature this week — status update on a job, or a basic kanban column view.</div>
+              <div class="item">Use this to practice the React patterns you learned (custom hooks, proper state management).</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div id="w2" class="week-content">
+      <div class="week-meta">
+        <span class="pill purple">DSA: Recursion + trees</span>
+        <span class="pill blue">Prep: System design RADIO</span>
+        <span class="pill amber">NeatHunt: Polish + demo-ready</span>
+      </div>
+      <div class="week-insight">
+        Recursion feels like magic until you see it: the function does one small thing and calls itself on the rest. Trees are recursion with structure. DOM problems are tree problems. On prep: this is where Osmos rejected you — system design structure.
+      </div>
+      <div class="tracks">
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-purple"></div>
+            <div class="track-name">DSA — recursion + tree basics</div>
+            <span class="track-tag tt-purple">Week 3 pattern</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">Day 1: Recursion only. Factorial + Fibonacci. Draw the call stack on paper. Don't code until you've drawn it.</div>
+              <div class="item">Day 2: Flatten nested array — recursion on real frontend data. This is a legit interview question.</div>
+              <div class="item">Day 3: Max Depth of Binary Tree — your first tree. It's just: 1 + max(left depth, right depth). That's it.</div>
+              <div class="item">Day 4: Invert Binary Tree — swap left and right recursively.</div>
+              <div class="item">Day 5: BFS — Level Order Traversal. Use a queue, not recursion. Important for DOM-level problems.</div>
+              <div class="item">Day 6: Implement deep clone — real frontend problem, uses recursion + type checking.</div>
+              <div class="item">Key rule: always draw the tree or recursion tree before writing a single line of code.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-blue"></div>
+            <div class="track-name">Interview prep — system design + build tools</div>
+            <span class="track-tag tt-blue">Osmos gap</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">RADIO framework — 5 full walkthroughs out loud this week. Say the letters as you go: "R — Requirements". Time yourself. (Mon-Wed)</div>
+              <div class="item highlight">R: Requirements (functional + non-functional, ask clarifying questions first). A: Architecture (component breakdown + data flow). D: Data model (what shape is the data). I: Interface (API contracts, props API). O: Optimizations (lazy loading, pagination, error states).</div>
+              <div class="item">System design practice: news feed, autocomplete, real-time chat (WebSocket vs SSE vs long-polling), file upload UI.</div>
+              <div class="item">Build tools gap (Osmos): Vite uses native ESM in dev, esbuild for transforms, Rollup for prod. Webpack bundles everything. Code splitting = dynamic import(). Tree shaking = dead code elimination, needs ES modules. (Thu)</div>
+              <div class="item">Core Web Vitals: LCP (load), INP (interaction), CLS (layout shift). Know what degrades each. (Fri)</div>
+              <div class="item">1 full system design mock — RADIO enforced. Every decision needs a one-sentence rationale.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-amber"></div>
+            <div class="track-name">NeatHunt — polish + demo-ready</div>
+            <span class="track-tag tt-amber">1.5 hrs/day</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">Make it look clean. Recruiters will look at this. Clean beats feature-rich.</div>
+              <div class="item">Write your 90-second pitch: problem → your decision → result. The Gmail OAuth story is good — mention the incremental scope upgrade pattern.</div>
+              <div class="item">Deploy or keep a working build ready. Interviewers sometimes ask to see live projects.</div>
+              <div class="item">If you have time: start the Gmail parsing route. OAuth is done, the next step is just fetching emails with gmail.readonly scope.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div id="w3" class="week-content">
+      <div class="week-meta">
+        <span class="pill purple">DSA: Timed mixed drills</span>
+        <span class="pill blue">Prep: Full mocks daily</span>
+        <span class="pill amber">NeatHunt: Maintain only</span>
+      </div>
+      <div class="week-insight">
+        Stop learning new things. Start performing. Every session this week is a simulation of the real interview. The goal is to make all of this feel automatic under pressure.
+      </div>
+      <div class="tracks">
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-purple"></div>
+            <div class="track-name">DSA — timed mixed pattern drills</div>
+            <span class="track-tag tt-purple">25 min timer</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">Every problem: set a 25-minute timer. No hints. Attempt first. Then understand what broke.</div>
+              <div class="item highlight">Before coding: name the pattern. If you can't name it, think for 5 minutes before writing code.</div>
+              <div class="item">Mix: 2 hashmap problems, 2 two-pointer, 1 recursion, 1 tree problem across the week.</div>
+              <div class="item">After each: explain your solution out loud as if in an interview. Say the time and space complexity. If you can't explain it, you don't know it yet.</div>
+              <div class="item">The goal is not to solve every problem. It's to build the habit of structured thinking under time pressure.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-blue"></div>
+            <div class="track-name">Interview prep — full mocks + communication</div>
+            <span class="track-tag tt-blue">Daily</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item highlight">One full mock per day. Alternate: coding round (Mon/Wed/Fri) and system design (Tue/Thu).</div>
+              <div class="item highlight">Communication fix: if you know the answer, give it clean. No "I think", no "I'm not sure exactly", no "I haven't worked with this much". Qualifiers only if you genuinely don't know.</div>
+              <div class="item">Project narratives — 90 seconds each, commit and stop: Document management widget (Material UI/Vuetify match, compiled code tenant security, 200+ users). GitTogether (MERN, JWT, AWS). Freelance VFX (Next.js + Sanity, headless CMS decision). NeatHunt (Gmail OAuth, optimistic UI, personal pain point).</div>
+              <div class="item">Behavioral: pushback story (EKL self-learning), ownership story (document widget full lifecycle), collaboration story, failure/growth story (Osmos system design → improved RADIO structure).</div>
+              <div class="item">After every mock: one thing done well, one thing to fix. Write it. Actually fix it next session.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="track-header" onclick="toggleTrack(this)">
+            <div class="track-dot td-amber"></div>
+            <div class="track-name">NeatHunt — hands off</div>
+            <span class="track-tag tt-amber">30 min max</span>
+            <span class="track-chevron">▶</span>
+          </div>
+          <div class="track-body">
+            <div class="items">
+              <div class="item">No new features. Fix only if something is broken.</div>
+              <div class="item">Lock in the 90-second pitch: product decision + technical decision + impact.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Key reminders -->
+  <div class="section">
+    <div class="section-label">Recurring patterns to watch</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="note">
+        <strong>Self-qualification habit</strong> — You know the right answer, then add "I'm not sure exactly" or "I haven't worked with this much." If you know it, say it clean. Qualifiers belong only when you genuinely don't know.
+      </div>
+      <div class="note">
+        <strong>Jumping to complex solutions</strong> — Reaching for Redux when simple state works. Proposing heavy patterns before understanding requirements. Anchor on the problem first, escalate only when needed.
+      </div>
+      <div class="note">
+        <strong>System design structure</strong> — Not organizing your answer is what got you rejected at Osmos, not knowledge depth. RADIO gives you the frame. Say the letters out loud as you go through them.
+      </div>
+      <div class="note">
+        <strong>Mock interviews > reading</strong> — Consistent finding across both your interview cycles. Every concept you study: do a mock drill within 24 hours of learning it. Passive reading does not transfer to interview performance.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<a class="back-top" href="#" title="Back to top">↑</a>
+
+<script>
+  function showWeek(i) {
+    document.querySelectorAll('.week-content').forEach((w, j) => w.classList.toggle('active', j === i));
+    document.querySelectorAll('.tab').forEach((t, j) => t.classList.toggle('active', j === i));
+  }
+
+  function toggleTrack(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.track-chevron');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+  }
+
+  function togglePattern(card) {
+    const insight = card.querySelector('.pattern-insight');
+    const isOpen = insight.classList.contains('open');
+    document.querySelectorAll('.pattern-insight').forEach(i => i.classList.remove('open'));
+    document.querySelectorAll('.pattern-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) {
+      insight.classList.add('open');
+      card.classList.add('open');
+    }
+  }
+</script>
+</body>
+</html>
