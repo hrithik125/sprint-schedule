@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --bg2: #17171f;
+    --bg3: #1e1e28;
+    --bg4: #252530;
+    --border: #2a2a38;
+    --border2: #333345;
+    --text1: #e8e8f0;
+    --text2: #9999b8;
+    --text3: #5a5a78;
+    --purple: #7f77dd;
+    --purple-bg: #26215c;
+    --purple-light: #cecbf6;
+    --blue: #378add;
+    --blue-bg: #042c53;
+    --blue-light: #b5d4f4;
+    --orange: #ef9f27;
+    --orange-bg: #412402;
+    --orange-light: #fac775;
+    --green: #5dcaa5;
+    --green-bg: #04342c;
+    --green-light: #9fe1cb;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text1);
+    min-height: 100vh;
+    padding: 32px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    margin-bottom: 32px;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text1);
+    letter-spacing: -0.02em;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--text3);
+    margin-top: 4px;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Day grid ── */
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 600px) {
+    .day-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .day-block {
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .day-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background: repeating-linear-gradient(
+      -45deg,
+      currentColor 0,
+      currentColor 1px,
+      transparent 0,
+      transparent 50%
+    );
+    background-size: 8px 8px;
+  }
+  .day-block .time {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    margin-bottom: 5px;
+    letter-spacing: 0.04em;
+  }
+  .day-block .block-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+  }
+  .day-block .block-sub {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+
+  .db-dsa { background: var(--purple-bg); border-color: #534ab7; color: var(--purple-light); }
+  .db-prep { background: var(--blue-bg); border-color: #185fa5; color: var(--blue-light); }
+  .db-nh { background: var(--orange-bg); border-color: #854f0b; color: var(--orange-light); }
+  .db-mock { background: var(--green-bg); border-color: #0f6e56; color: var(--green-light); }
+
+  /* ── Process box ── */
+  .process-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 36px;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 600px) {
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  .p-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    border-radius: var(--radius);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .p-step:hover { border-color: var(--purple); }
+  .p-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--purple-bg);
+    border: 1px solid var(--purple);
+    color: var(--purple-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .p-text {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+  .p-text strong {
+    font-weight: 600;
+    color: var(--text1);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  /* ── Week tabs ── */
+  .week-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 7px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border2);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text3);
+    background: var(--bg2);
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.01em;
+  }
+  .tab:hover { color: var(--text2); border-color: var(--border2); }
+  .tab.active {
+    background: var(--purple-bg);
+    border-color: var(--purple);
+    color: var(--purple-light);
+  }
+
+  /* ── Week content ── */
+  .week-content { display: none; }
+  .week-content.active { display: block; }
+
+  .week-meta {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--bg3);
+    color: var(--text2);
+    border: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .insight-box {
+    border-left: 2px solid var(--purple);
+    padding: 12px 16px;
+    background: linear-gradient(90deg, rgba(38,33,92,0.5) 0%, transparent 100%);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--purple-light);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* ── Track ── */
+  .track { margin-bottom: 24px; }
+  .track-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .track-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .td-dsa { background: var(--purple); box-shadow: 0 0 8px rgba(127,119,221,0.5); }
+  .td-prep { background: var(--blue); box-shadow: 0 0 8px rgba(55,138,221,0.5); }
+  .td-nh { background: var(--orange); box-shadow: 0 0 8px rgba(239,159,39,0.5); }
+
+  .track-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text1);
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+  .track-tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+  .tt-dsa { background: var(--purple-bg); color: var(--purple-light); border: 1px solid #534ab7; }
+  .tt-prep { background: var(--blue-bg); color: var(--blue-light); border: 1px solid #185fa5; }
+  .tt-nh { background: var(--orange-bg); color: var(--orange-light); border: 1px solid #854f0b; }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+  .item {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.55;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 2px 0;
+  }
+  .item::before {
+    content: "→";
+    color: var(--text3);
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 2px;
+    font-family: 'DM Mono', monospace;
+  }
+  .item.highlight {
+    color: var(--text1);
+    font-weight: 500;
+  }
+  .item.highlight::before { color: var(--purple); }
+
+  .drill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    background: var(--bg3);
+    color: var(--text2);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    margin-left: 16px;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .drill-btn:hover {
+    background: var(--purple-bg);
+    border-color: var(--purple);
+    color: var(--purple-light);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+  }
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.06em;
+  }
+  .week-indicator {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Interview Prep · 4-week sprint</div>
+  <div class="header-title">Full Prep Schedule</div>
+  <div class="header-sub">DSA · React · System Design · NeatHunt</div>
+</div>
+
+<div class="section-label">Daily routine</div>
+<div class="day-grid">
+  <div class="day-block db-dsa">
+    <div class="time">9 – 10:30am</div>
+    <div class="block-title">DSA</div>
+    <div class="block-sub">1 problem, done deeply</div>
+  </div>
+  <div class="day-block db-prep">
+    <div class="time">11am – 1pm</div>
+    <div class="block-title">Interview prep</div>
+    <div class="block-sub">React, TS, system design</div>
+  </div>
+  <div class="day-block db-nh">
+    <div class="time">2 – 3:30pm</div>
+    <div class="block-title">NeatHunt</div>
+    <div class="block-sub">Ship one thing</div>
+  </div>
+  <div class="day-block db-mock">
+    <div class="time">4 – 5pm</div>
+    <div class="block-title">Mock / review</div>
+    <div class="block-sub">Daily debrief or mock</div>
+  </div>
+</div>
+
+<div class="section-label">DSA thinking process — use on every problem</div>
+<div class="process-box">
+  <div class="process-steps">
+    <div class="p-step">
+      <div class="p-num">1</div>
+      <div class="p-text"><strong>Restate it</strong>Say the problem back in your own words out loud</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">2</div>
+      <div class="p-text"><strong>Small example</strong>Walk through it manually with a tiny input. Write it out.</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">3</div>
+      <div class="p-text"><strong>Name the pattern</strong>What does this feel like? Counting? Shrinking window? Two pointers?</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">4</div>
+      <div class="p-text"><strong>Pseudocode</strong>Write English steps before any code. Don't skip this.</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">5</div>
+      <div class="p-text"><strong>Code it</strong>Translate pseudocode line by line. Slow is fine.</div>
+    </div>
+    <div class="p-step">
+      <div class="p-num">6</div>
+      <div class="p-text"><strong>Edge cases</strong>Empty input, single item, duplicates, negatives.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label">4-week plan</div>
+<div class="week-tabs">
+  <button class="tab active" onclick="showWeek(0)">Week 1</button>
+  <button class="tab" onclick="showWeek(1)">Week 2</button>
+  <button class="tab" onclick="showWeek(2)">Week 3</button>
+  <button class="tab" onclick="showWeek(3)">Week 4</button>
+</div>
+
+<!-- Week 1 -->
+<div id="w0" class="week-content active">
+  <div class="week-meta">
+    <span class="meta-pill">DSA: Hashmaps</span>
+    <span class="meta-pill">Prep: Gamehok gaps</span>
+    <span class="meta-pill">NeatHunt: One feature</span>
+  </div>
+  <div class="insight-box">
+    The hashmap pattern solves ~30% of easy problems. If you can count things, you can probably beat it with a frequency map. This is your week 1 superpower.
+  </div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-dsa"></div>
+      <div class="track-name">DSA — frequency maps + hashmaps</div>
+      <span class="track-tag tt-dsa">1 problem/day, deeply</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">Day 1: Don't code yet. Learn the process above. Do it with a pen on paper — Two Sum.</div>
+      <div class="item">Day 2: Valid Anagram — count character frequency with an object. Why does a hashmap make this O(n)?</div>
+      <div class="item">Day 3: Group Anagrams — build intuition: sorted string as a key groups anagrams</div>
+      <div class="item">Day 4: Top K frequent elements — frequency map + sort</div>
+      <div class="item">Day 5: Contains duplicate + Length of longest substring without repeating (stretch)</div>
+      <div class="item">Day 6: Revisit any problem you couldn't solve. Recode from scratch without looking.</div>
+      <div class="item">Day 7: Rest. Read your solutions and write down the pattern in one sentence each.</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Teach me the hashmap/frequency map pattern from scratch with Two Sum — use the 6-step thinking process and quiz me at the end')">→ Start day 1 now</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-prep"></div>
+      <div class="track-name">Interview prep — fix Gamehok failures</div>
+      <span class="track-tag tt-prep">2 hrs/day</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">Optimistic UI full pattern + rollback (Mon/Tue)</div>
+      <div class="item highlight">Race conditions + AbortController — build a debounced search (Wed/Thu)</div>
+      <div class="item">TypeScript — type vs interface, utility types (Fri)</div>
+      <div class="item">Promise.all concurrency limits + chat persistence (Sat)</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Mock drill me on optimistic UI — explain the pattern first then give me a coding problem')">→ Start with optimistic UI</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-nh"></div>
+      <div class="track-name">NeatHunt — pick one feature, ship it</div>
+      <span class="track-tag tt-nh">1.5 hrs/day</span>
+    </div>
+    <div class="items">
+      <div class="item">Pick one feature this week — email parsing, job status update, or kanban board</div>
+      <div class="item">Use this as TypeScript practice — add types to your components as you go</div>
+      <div class="item">Goal: something you can demo or mention in an interview by end of week</div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 2 -->
+<div id="w1" class="week-content">
+  <div class="week-meta">
+    <span class="meta-pill">DSA: Two pointers + sliding window</span>
+    <span class="meta-pill">Prep: React deep internals</span>
+    <span class="meta-pill">NeatHunt: Add complexity</span>
+  </div>
+  <div class="insight-box">
+    Two pointers and sliding window together cover another ~25% of interview problems. The key insight: instead of nested loops (O(n²)), you move two indices smartly to stay O(n).
+  </div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-dsa"></div>
+      <div class="track-name">DSA — two pointers + sliding window</div>
+      <span class="track-tag tt-dsa">1 problem/day</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">Day 1: Valid Palindrome — two pointer from both ends, move inward</div>
+      <div class="item">Day 2: Two Sum II (sorted array) — when array is sorted, two pointers shine</div>
+      <div class="item">Day 3: Container With Most Water — classic two pointer, understand WHY you move the shorter side</div>
+      <div class="item">Day 4: Max average subarray — fixed-size sliding window</div>
+      <div class="item">Day 5: Longest substring without repeating chars — variable sliding window with hashmap</div>
+      <div class="item">Day 6: Minimum window substring (hard — attempt only, understand approach)</div>
+      <div class="item">Pattern recognition exercise: given a new problem, identify if it's two pointers or sliding window before coding</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Teach me two pointers from scratch — start with Valid Palindrome, use the 6-step thinking process, then quiz me')">→ Start two pointers</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-prep"></div>
+      <div class="track-name">Interview prep — React internals</div>
+      <span class="track-tag tt-prep">2 hrs/day</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">useEffect stale closures — reproduce bug, fix 3 ways (Mon/Tue)</div>
+      <div class="item">React.memo vs useMemo vs useCallback — when to actually use each (Wed)</div>
+      <div class="item">State management decision framework — when NOT to use Redux (Thu)</div>
+      <div class="item">Custom hooks — build useFetch, useDebounce from scratch (Fri/Sat)</div>
+      <div class="item">1 full mock interview this week — React coding round</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Give me a stale closure bug to debug, then ask me to fix it three different ways')">→ Start with stale closures</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-nh"></div>
+      <div class="track-name">NeatHunt — add TypeScript</div>
+      <span class="track-tag tt-nh">1.5 hrs/day</span>
+    </div>
+    <div class="items">
+      <div class="item">Migrate existing components to TypeScript — real practice, not toy examples</div>
+      <div class="item">Type your API responses properly — this alone teaches you 80% of practical TS</div>
+      <div class="item">Ship one more feature — focus on something that exercises the React patterns you learned this week</div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 3 -->
+<div id="w2" class="week-content">
+  <div class="week-meta">
+    <span class="meta-pill">DSA: Recursion + trees</span>
+    <span class="meta-pill">Prep: System design RADIO</span>
+    <span class="meta-pill">NeatHunt: Polish + demo-ready</span>
+  </div>
+  <div class="insight-box">
+    Recursion feels like magic until you see the pattern: the function does one small thing and calls itself on the rest. Trees are just recursion with structure. DOM problems are tree problems.
+  </div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-dsa"></div>
+      <div class="track-name">DSA — recursion thinking + tree basics</div>
+      <span class="track-tag tt-dsa">1 problem/day</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">Day 1: Understand recursion with factorial + fibonacci — draw the call stack on paper</div>
+      <div class="item">Day 2: Flatten nested array — recursion on real frontend data structure</div>
+      <div class="item">Day 3: Max depth of binary tree — your first tree problem. It's just recursion + structure.</div>
+      <div class="item">Day 4: Invert binary tree — classic, understand the pattern</div>
+      <div class="item">Day 5: BFS (level order traversal) — use a queue, not recursion. Important for DOM-level problems.</div>
+      <div class="item">Day 6: Implement a simple deep clone function — real frontend problem, uses recursion</div>
+      <div class="item">Key: always draw the tree/recursion tree before coding. Visualization beats memorization.</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Teach me recursion from absolute scratch — start with the mental model, then walk me through flatten nested array step by step')">→ Start recursion</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-prep"></div>
+      <div class="track-name">Interview prep — system design + build tools</div>
+      <span class="track-tag tt-prep">2 hrs/day</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">RADIO framework — 5 full out-loud walkthroughs this week. Time yourself.</div>
+      <div class="item">System design questions: news feed, autocomplete, real-time chat, file upload UI</div>
+      <div class="item">Vite vs webpack, code splitting, tree shaking — the Osmos gap (Wed)</div>
+      <div class="item">Core Web Vitals + accessibility basics (Thu)</div>
+      <div class="item">1 full mock — system design round with strict RADIO enforcement</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Give me a frontend system design question and enforce RADIO structure strictly — call me out if I skip a section')">→ RADIO mock now</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-nh"></div>
+      <div class="track-name">NeatHunt — make it demo-ready</div>
+      <span class="track-tag tt-nh">1.5 hrs/day</span>
+    </div>
+    <div class="items">
+      <div class="item">Polish UI — recruiters will look at this. Clean > feature-rich.</div>
+      <div class="item">Write a 90-second explanation of what NeatHunt does and the decisions you made</div>
+      <div class="item">Deploy or keep a working build ready to show — interviewers sometimes ask to see live projects</div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 4 -->
+<div id="w3" class="week-content">
+  <div class="week-meta">
+    <span class="meta-pill">DSA: Mixed patterns + timed drills</span>
+    <span class="meta-pill">Prep: Full mocks daily</span>
+    <span class="meta-pill">NeatHunt: Maintenance only</span>
+  </div>
+  <div class="insight-box">
+    Week 4 is performance week. Stop learning new things. Start performing under pressure. The goal is to make everything you built feel automatic.
+  </div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-dsa"></div>
+      <div class="track-name">DSA — timed mixed pattern drills</div>
+      <span class="track-tag tt-dsa">1 timed problem/day</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">Every problem this week: 25 minute timer. No hints. Then review and understand what went wrong.</div>
+      <div class="item">Before starting each problem — name the pattern first. If you can't name it, think for 5 minutes before coding.</div>
+      <div class="item">Mix: 2 hashmap, 2 two-pointer, 1 recursion, 1 tree problem</div>
+      <div class="item">After each: explain your solution out loud as if in an interview. Talk through time/space complexity.</div>
+      <div class="item">The goal is not solving every problem — it's building the habit of structured thinking under time pressure.</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Give me a mixed DSA problem and time me — 25 minutes. Tell me the difficulty and pattern category only after I submit my answer.')">→ Timed problem now</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-prep"></div>
+      <div class="track-name">Interview prep — full mocks + communication</div>
+      <span class="track-tag tt-prep">2–3 hrs/day</span>
+    </div>
+    <div class="items">
+      <div class="item highlight">One full mock per day — alternate coding round and system design round</div>
+      <div class="item">Project story drills — 90 seconds each, no qualifiers, commit to the answer</div>
+      <div class="item">Behavioral: pushback story, ownership story, collaboration story — tight and specific</div>
+      <div class="item">After every mock: one thing you did well, one thing to fix. Write it down. Actually fix it the next day.</div>
+    </div>
+    <button class="drill-btn" onclick="sendPrompt('Run a full mock interview with me — 3 technical questions + 2 behavioral. Be a tough interviewer. Review everything at the end.')">→ Full mock now</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="track">
+    <div class="track-header">
+      <div class="track-dot td-nh"></div>
+      <div class="track-name">NeatHunt — hands off, just maintain</div>
+      <span class="track-tag tt-nh">30 min/day max</span>
+    </div>
+    <div class="items">
+      <div class="item">No new features this week. If something is broken, fix it.</div>
+      <div class="item">Make sure the 90-second pitch is locked — product decision, technical decision, impact.</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="footer-note">4-week sprint · starts now</span>
+  <span class="week-indicator" id="week-indicator">Week 1 of 4</span>
+</div>
+
+<script>
+function showWeek(i) {
+  document.querySelectorAll('.week-content').forEach((w, j) => w.classList.toggle('active', j === i));
+  document.querySelectorAll('.tab').forEach((t, j) => t.classList.toggle('active', j === i));
+  document.getElementById('week-indicator').textContent = `Week ${i + 1} of 4`;
+}
+
+function sendPrompt(text) {
+  if (typeof window.sendPrompt === 'function') {
+    window.sendPrompt(text);
+  } else {
+    alert('Drill: ' + text);
+  }
+}
+</script>
+</body>
+</html>
